@@ -242,6 +242,85 @@ def showPoints(playerTile, computerTile):
     print('You have %s points. The computer has %s points.' % (scores[playerTile], scores[computerTile]))
 
 
+def getRandomMove(board, tile):
+    # Return a random move.
+    return random.choice( getValidMoves(board, tile) )
+
+
+def isOnSide(x, y):
+    return x == 0 or x == 7 or y == 0 or y == 7
+
+
+def getCornerSidesBestMove(board, tile):
+    # Return a corner move, or a side move, or the best move.
+    possibleMoves = getValidMoves(board, tile)
+
+    # randomize the order of the possible moves
+    random.shuffle(possibleMoves)
+    
+    # always go for a corner if available.
+    for x, y in possibleMoves:
+        if isOnCorner(x, y):
+            return [x, y]
+
+    # if there is no corner, return a side move.
+    for x, y in possibleMoves:
+        if isOnSide(x, y):
+            return [x, y]
+
+    return getComputerMove(board, tile)
+
+
+def getSideBestMove(board, tile):
+    # Return a corner move, or a side move, or the best move.
+    possibleMoves = getValidMoves(board, tile)
+
+    # randomize the order of the possible moves
+    random.shuffle(possibleMoves)
+
+    # return a side move, if available
+    for x, y in possibleMoves:
+        if isOnSide(x, y):
+            return [x, y]
+
+    return getComputerMove(board, tile)
+
+
+def getWorstMove(board, tile):
+    # Return the move that flips the least number of tiles.
+    possibleMoves = getValidMoves(board, tile)
+
+    # randomize the order of the possible moves
+    random.shuffle(possibleMoves)
+
+    # Go through all the possible moves and remember the best scoring move
+    worstScore = 64
+    for x, y in possibleMoves:
+        dupeBoard = getBoardCopy(board)
+        makeMove(dupeBoard, tile, x, y)
+        score = getScoreOfBoard(dupeBoard)[tile]
+        if score < worstScore:
+            worstMove = [x, y]
+            worstScore = score
+
+    return worstMove
+
+
+def getCornerWorstMove(board, tile):
+    # Return a corner, a space, or the move that flips the least number of tiles.
+    possibleMoves = getValidMoves(board, tile)
+
+    # randomize the order of the possible moves
+    random.shuffle(possibleMoves)
+
+    # always go for a corner if available.
+    for x, y in possibleMoves:
+        if isOnCorner(x, y):
+            return [x, y]
+
+    return getWorstMove(board, tile)
+
+
 
 print('Welcome to Reversi!')
 
