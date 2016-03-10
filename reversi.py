@@ -152,7 +152,7 @@ def whoGoesFirst():
 def playAgain():
     # This function returns True if the player wants to play again, otherwise it returns False.
     print('Do you want to play again? (yes or no)')
-    return input().lower.startswith('y')
+    return input().lower().startswith('y')
 
 
 def makeMove(board, tile, xstart, ystart):
