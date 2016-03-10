@@ -112,6 +112,7 @@ def getValidMoves(board, tile):
                 validMoves.append([x, y])
     return validMoves
 
+
 def getScoreOfBoard(board):
     # Determine the score by counting the tiles. Returns a dictionary with keys 'X' and 'O'.
     xscore = 0
