@@ -292,7 +292,7 @@ while True:
 
     # Display the final score.
     drawBoard(mainBoard)
-    score = getScoreOfBoard(mainBoard)
+    scores = getScoreOfBoard(mainBoard)
     print('X scored %s points. O scored %s points.' % (scores['X'], scores['O']))
     if scores[playerTile] > scores[computerTile]:
         print('You beat the computer by %s points! Congratulations!' % (scores[playerTile] - scores[computerTile]))
