@@ -263,7 +263,7 @@ while True:
             else:
                 drawBoard(mainBoard)
             showPoints(playerTile, computerTile)
-            move = getPlayerMove(mainBoard, playerTile)
+            move = getComputerMove(mainBoard, playerTile)
             if move == 'quit':
                 print('Thanks for playing!')
                 sys.exit() # terminate the program
